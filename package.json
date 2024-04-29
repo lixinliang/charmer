@@ -9,7 +9,9 @@
     "build:index": "rsbuild build --env-mode=index",
     "build:main": "rsbuild build --env-mode=main",
     "build:view": "rsbuild build --env-mode=view",
-    "dev": "rsbuild dev --env-mode=view --open"
+    "dev": "npm run dev:view",
+    "dev:main": "rsbuild dev --env-mode=main --open",
+    "dev:view": "rsbuild dev --env-mode=view --open"
   },
   "keywords": [],
   "author": "",
