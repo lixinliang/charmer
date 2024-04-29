@@ -3,6 +3,7 @@ import {
   mergeRsbuildConfig,
   type RsbuildConfig,
 } from '@rsbuild/core'
+import { pluginReact } from '@rsbuild/plugin-react'
 import SimpleGit from 'simple-git'
 import pkg from './package.json'
 
@@ -29,7 +30,7 @@ export default defineConfig(async () => {
     source: {
       define: {
         HASH: `"${hash}"`,
-        MODE: `"${process.env.MODE}`,
+        MODE: `"${process.env.MODE}"`,
         VERSION: `"${pkg.version}"`,
         TIMESTAMP: `"${+new Date}"`,
       },
@@ -69,6 +70,9 @@ export default defineConfig(async () => {
         }),
       },
     },
+    plugins: [
+      pluginReact(),
+    ],
   })
   
   const indexConfig = mergeRsbuildConfig(baseConfig, {
