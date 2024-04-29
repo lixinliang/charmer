@@ -33,6 +33,9 @@ export default defineConfig(async () => {
         VERSION: `"${pkg.version}"`,
         TIMESTAMP: `"${+new Date}"`,
       },
+      alias: {
+        '@': './entry',
+      },
     },
     output: {
       distPath: {
