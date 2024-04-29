@@ -1,6 +1,7 @@
 import localForage from 'localforage'
+import { log } from '@/utils/log'
 
-window._addLog({
+log({
   hash: HASH,
   mode: MODE,
   version: VERSION,
@@ -15,7 +16,7 @@ const storeBundle = localForage.createInstance({
 
 window._storeBundle = storeBundle
 
-window._invokeBundle({
+window._invokeBundle?.({
   name: 'view',
   storage: storeBundle,
 })

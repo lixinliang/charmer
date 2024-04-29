@@ -1,18 +1,11 @@
+import { log } from '@/utils/log'
+
 String.prototype.call = function () {
   const method = new Function(this)
   method()
 }
 
-window._metaLog = []
-
-window._addLog = (meta) => {
-  window._metaLog.push({
-    meta,
-    timestamp: +new Date,
-  })
-}
-
-window._addLog({
+log({
   hash: HASH,
   mode: MODE,
   version: VERSION,
