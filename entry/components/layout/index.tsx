@@ -1,10 +1,9 @@
-import { type FC } from 'react'
 import { Layer } from '@/components/layer'
 import { Control } from '@/components/control'
 import { Gyroscope } from '@/components/gyroscope'
 import { useCanvas } from '@/hooks/canvas'
 
-export const Layout: FC = () => {
+export const Layout = () => {
   const Media = useCanvas()
   const Mask = useCanvas()
 
