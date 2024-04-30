@@ -4,15 +4,8 @@ import {
   type PropsWithChildren,
 } from 'react'
 import { GalleryInstance, GallerySource } from '@/utils/gallery'
-import { emitter, ADD_GALLERY, CLICK_BUTTON_PHOTO } from '@/utils/events'
-
-const storeGallery = window._localForage?.createInstance({
-  name: 'gallery',
-})
-
-window._storeGallery = storeGallery
-
-const GALLERY_LIST = 'GALLERY_LIST'
+import { emitter, ADD_GALLERY } from '@/utils/events'
+import { storeGallery, GALLERY_LIST } from '@/utils/store'
 
 export const Store: FC<PropsWithChildren> = (props) => {
   const { children } = props
@@ -20,12 +13,12 @@ export const Store: FC<PropsWithChildren> = (props) => {
   useEffect(() => {
     const handler = (gallery: GalleryInstance, callback?: () => void) => {
       if (storeGallery) {
-        storeGallery.getItem<Array<GallerySource>>(GALLERY_LIST).then((array) => {
+        storeGallery.getItem<GallerySource[]>(GALLERY_LIST).then((array) => {
           const list = array || []
           const item: GallerySource = {
             base64: gallery.base64,
           }
-          list.push(item)
+          list.unshift(item)
           storeGallery.setItem(GALLERY_LIST, list).then(() => {
             callback?.()
           })
@@ -34,16 +27,9 @@ export const Store: FC<PropsWithChildren> = (props) => {
         callback?.()
       }
     }
-
-    const handle3 = () => {
-      console.log('CLICK_BUTTON_PHOTO')
-    }
-
     emitter.on(ADD_GALLERY, handler)
-    emitter.on(CLICK_BUTTON_PHOTO, handle3)
     return () => {
       emitter.off(ADD_GALLERY, handler)
-      emitter.off(CLICK_BUTTON_PHOTO, handle3)
     }
   }, [])
 

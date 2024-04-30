@@ -1,5 +1,6 @@
 import { Layer } from '@/components/layer'
 import { Video } from '@/components/video'
+import { Dialog } from '@/components/dialog'
 import { Control } from '@/components/control'
 import { Gyroscope } from '@/components/gyroscope'
 import { mask } from '@/utils/mask'
@@ -32,6 +33,7 @@ export const Layout = () => {
       <Layer.Bottom className="pb-6">
         <Control />
       </Layer.Bottom>
+      <Dialog />
     </div>
   )
 }
