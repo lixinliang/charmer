@@ -13,8 +13,9 @@ export const Camera = () => {
     const gallery = await createGallery({
       base64,
     })
-    emitter.emit(ADD_GALLERY, gallery)
-    emitter.emit(UPDATE_MASK)
+    emitter.emit(ADD_GALLERY, gallery, () => {
+      emitter.emit(UPDATE_MASK, gallery)
+    })
   }, [])
 
   return (
