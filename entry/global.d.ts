@@ -38,6 +38,7 @@ declare interface Window {
   _localForage: LocalForage
   _storeBundle: LocalForage
   _storeGallery: LocalForage
+  _emitter: EventEmitter
 }
 
 declare interface Navigator {
