@@ -17,6 +17,11 @@ const storeBundle = localForage.createInstance({
 window._storeBundle = storeBundle
 
 window._invokeBundle?.({
-  name: 'view',
+  name: 'view.css',
+  storage: storeBundle,
+})
+
+window._invokeBundle?.({
+  name: 'view.js',
   storage: storeBundle,
 })

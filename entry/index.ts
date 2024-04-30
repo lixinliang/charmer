@@ -12,15 +12,28 @@ log({
   timestamp: TIMESTAMP,
 })
 
+const isJS = (name: string) => /\.js$/.test(name)
+const isCSS = (name: string) => /\.css$/.test(name)
+
 window._updateBundle = (options) => {
   const { storage, name } = options
-  return fetch(`./static/js/${name}.js`)
-  .then((response) => {
-    return response.text()
-  }).then((bundle) => {
-    storage.setItem(name, bundle)
-    return bundle
-  })
+  let url;
+  if (isJS(name)) {
+    url = `./static/js/${name}`
+  }
+  if (isCSS(name)) {
+    url = `./static/css/${name}`
+  }
+  if (url) {
+    return fetch(url)
+    .then((response) => {
+      return response.text()
+    }).then((bundle) => {
+      storage.setItem(name, bundle)
+      return bundle
+    })
+  }
+  return Promise.reject(new Error('Invalid bundle name'))
 }
 
 window._invokeBundle = (options) => {
@@ -37,13 +50,20 @@ window._invokeBundle = (options) => {
     }
   })
   .then((bundle) => {
-    bundle.call()
+    if (isJS(name)) {
+      bundle.call()
+    }
+    if (isCSS(name)) {
+      const style = document.createElement('style')
+      style.innerHTML = bundle
+      document.head.appendChild(style)
+    }
   })
 }
 
 if (navigator.standalone) {
   window._invokeBundle({
-    name: 'main',
+    name: 'main.js',
     storage: localStorage,
   })
 }
