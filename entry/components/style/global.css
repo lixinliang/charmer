@@ -6,6 +6,7 @@ html,
 body,
 app {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -14,4 +15,8 @@ body {
 
 app {
   display: block;
+}
+
+* {
+  user-select: none;
 }
