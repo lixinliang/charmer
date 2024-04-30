@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { emitter, CLICK_BUTTON_PHOTO } from '@/utils/events'
+import { emitter, CLICK_BUTTON_SHUTTER } from '@/utils/events'
 
 export const Shutter = () => {
   const handleClick = useCallback(() => {
-    emitter.emit(CLICK_BUTTON_PHOTO)
+    emitter.emit(CLICK_BUTTON_SHUTTER)
   }, [])
 
   return (

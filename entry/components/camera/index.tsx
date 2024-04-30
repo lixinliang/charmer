@@ -14,7 +14,7 @@ export const Camera = () => {
       base64,
     })
     emitter.emit(ADD_GALLERY, gallery)
-    emitter.emit(UPDATE_MASK, gallery)
+    emitter.emit(UPDATE_MASK)
   }, [])
 
   return (
