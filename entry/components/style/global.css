@@ -8,6 +8,10 @@ app {
   height: 100%;
 }
 
+body {
+  overscroll-behavior: none;
+}
+
 app {
   display: block;
 }
