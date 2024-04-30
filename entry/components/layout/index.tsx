@@ -1,44 +1,18 @@
 import { Layer } from '@/components/layer'
+import { Video } from '@/components/video'
 import { Control } from '@/components/control'
 import { Gyroscope } from '@/components/gyroscope'
+import { mask } from '@/utils/mask'
 import { useCanvas } from '@/hooks/canvas'
-import { GalleryInstance } from '@/utils/gallery'
-import { emitter, UPDATE_MASK } from '@/utils/events'
-
 
 export const Layout = () => {
-  const Media = useCanvas(() => {
-
-  })
-
-  const Mask = useCanvas((canvas, context) => {
-    const {
-      width: canvasWidth,
-      height: canvasHeight,
-    } = canvas
-    // const canvasWidthHalf = canvasWidth / 2
-    const canvasHeightHalf = canvasHeight / 2
-    emitter.on(UPDATE_MASK, (gallery: GalleryInstance) => {
-      context.clearRect(0, 0, canvasWidth, canvasHeight)
-      const {
-        width: galleryWidth,
-        height: galleryHeight,
-        canvas: galleryCanvas,
-      } = gallery
-
-      const fixedRatio = canvasWidth / galleryWidth
-      const fixedHeight = galleryHeight * fixedRatio
-      const fixedTop = canvasHeightHalf - fixedHeight / 2
-
-      context.drawImage(galleryCanvas, 0, fixedTop, canvasWidth, fixedHeight)
-    })
-  })
+  const Mask = useCanvas(mask)
 
   return (
     <div className="relative top-0 left-0 w-full h-full">
       <Layer className="bg-black" />
       <Layer>
-        <Media />
+        <Video />
       </Layer>
       <Layer>
         <Mask className='opacity-50' />
