@@ -1,3 +1,4 @@
+import '@/utils/dev'
 import { log } from '@/utils/log'
 import { init } from '@/utils/init'
 
