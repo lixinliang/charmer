@@ -2,11 +2,10 @@ import {
   memo,
   useEffect,
   useRef,
-  type FC,
   type HTMLAttributes,
 } from 'react'
 
-interface Init {
+export interface Init {
   (
     canvas: HTMLCanvasElement,
     context: CanvasRenderingContext2D,
